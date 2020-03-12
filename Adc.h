@@ -32,7 +32,7 @@
 #include <Arduino.h>
 
 
-#define ADC_NUM_PINS 2  /* Total number of ADC pins */
+#define ADC_NUM_PINS 8  /* Maximum number of ADC pins */
 
 /*
  * ADC prescaler values
@@ -49,7 +49,7 @@ enum AdcPrescaler_t {
 
 /*
  * Analog pin numbers
- * Note: 
+ * Note:
  * Arduino macro A0 = ADC_PIN0 + 14
  * the same applies for A1, A2...
  */
@@ -79,23 +79,24 @@ enum AdcReference_t {
 class AdcClass {
 
   public:
-  
-    /* 
+
+    /*
      *  Initialize the ADC
-     *  Parameters:
-     *    prescaler  : ADC prescaler value
-     *    reference  : ADC reference voltage
-     *    numPins    : number of analog pins to sample
-     *    avgSamples : number of samples to be averaged
      */
-    void initialize (AdcPrescaler_t prescaler = ADC_PRESCALER_128, AdcReference_t reference = ADC_DEFAULT, uint8_t numPins = 0, uint8_t avgSamples = 1);
+    void initialize (
+      AdcPrescaler_t prescaler,  // ADC prescaler value
+      AdcReference_t reference,  // ADC reference voltage
+      uint8_t avgSamples,        // Number of averaged samples
+      uint8_t numPins,           // Number of ADC pins to be read
+      AdcPin_t *adcPins          // Array of ADC pin numbers of size numPins
+      );
 
     /*
      * Start ADC conversion
-     * Parameters:
-     *   adcPin : ADC pin number (0..7 for ATmega328p)
      */
-    void start (AdcPin_t adcPin);
+    void start (
+      AdcPin_t adcPin  // ADC pin number (0..7 for ATmega328p)
+      );
 
     /*
      * Read ADC result
@@ -107,7 +108,7 @@ class AdcClass {
 
     /*
      * Read all preset ADC inputs
-     * When called repeatedly it will cycle through the pre-configuraed ADC chanels defined by numPins,
+     * When called repeatedly it will cycle through the pre-configuraed ADC channels defined by numPins,
      * get the ADC results, average them as defined in avgSamples and store them in the result array.
      * Return value:
      *  false : no result available yet
@@ -120,12 +121,12 @@ class AdcClass {
      */
     uint32_t result[ADC_NUM_PINS];
 
-  private:  
-
+  private:
     bool working = false;
     AdcReference_t reference;
+    AdcPin_t adcPins[ADC_NUM_PINS];
     uint8_t numPins = 0;
-    uint8_t currentPin = 0;
+    uint8_t pinIdx = 0;
     uint8_t avgSamples = 1;
     uint8_t avgCount = 0;
 };
@@ -136,5 +137,6 @@ class AdcClass {
  * ADC class instantiated as a singleton
  */
 extern AdcClass Adc;
+
 
 #endif // __ADC_H
