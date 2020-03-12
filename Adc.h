@@ -3,8 +3,8 @@
  * Non-blocking read the ADC output as an alternative
  * to the blocking analogRead() method.
  *
- * This source file is part of the Lithium-Ion Battery Charger Arduino firmware
- * found under http://www.github.com/microfarad-de/li-charger
+ * This source file can be found under:
+ * http://www.github.com/microfarad-de/Adc
  * 
  * Please visit:
  *   http://www.microfarad.de
