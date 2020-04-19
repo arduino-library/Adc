@@ -7,7 +7,7 @@ Example applications:
 * https://github.com/microfarad-de/antenna-tuner
 * https://github.com/microfarad-de/pi-ups
 
-Following are the main features:
+Main features:
 
 * Cycle through a list of Analog inputs
 * Perform averaging over several consecutive ADC readings
