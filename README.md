@@ -7,5 +7,5 @@ This library implements an abstraction layer for the Analog to Digital Converter
 
 Git commands:
 
-* git submodule add `ssh://git@github.com/arduino-library/Adc src/Adc`
-* git submodule add `https://github.com/arduino-library/Adc src/Adc`
+* `git submodule add ssh://git@github.com/arduino-library/Adc src/Adc`
+* `git submodule add https://github.com/arduino-library/Adc src/Adc`
